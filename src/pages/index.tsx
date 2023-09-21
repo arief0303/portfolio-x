@@ -54,6 +54,13 @@ export const AnimatedText = () => {
 
 const ShaderPlane = ({ vertex, fragment }) => {
   const meshRef = useRef();
+  let ratio
+
+  if (window.innerWidth < 600) {
+    ratio = 1
+  } else {
+    ratio = 1.5
+  }
 
   // Load the noise texture and update the shader uniform
   const noiseTexture = useTexture("noise2.png");
@@ -85,7 +92,7 @@ const ShaderPlane = ({ vertex, fragment }) => {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[4, 3]} />
+      <planeGeometry args={[4*ratio, 3*ratio]} />
       <shaderMaterial
         uniforms={uniforms}
         vertexShader={vertex}
@@ -168,7 +175,6 @@ const TitleText = ({ el }) => {
   let size
   let font = "/fonts/XYBER - Regular.otf"
 
-  //if on mobile, resize text
   if (window.innerWidth < 600) {
     size = 0.35
   } else {
