@@ -19,6 +19,39 @@ import axios from "axios";
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 extend({ TextGeometry })
 
+const FADE_INTERVAL_MS = 1750
+const WORD_CHANGE_INTERVAL_MS = FADE_INTERVAL_MS * 2
+const WORDS_TO_ANIMATE = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
+
+type FadeProp = { fade: 'fade-in' | 'fade-out' }
+
+export const AnimatedText = () => {
+  const [fadeProp, setFadeProp] = useState<FadeProp>({ fade: 'fade-in' })
+  const [wordOrder, setWordOrder] = useState(0)
+
+  useEffect(() => {
+    const fadeTimeout = setInterval(() => {
+      fadeProp.fade === 'fade-in' ? setFadeProp({ fade: 'fade-out' }) : setFadeProp({ fade: 'fade-in' })
+    }, FADE_INTERVAL_MS)
+
+    return () => clearInterval(fadeTimeout)
+  }, [fadeProp])
+
+  useEffect(() => {
+    const wordTimeout = setInterval(() => {
+      setWordOrder((prevWordOrder) => (prevWordOrder + 1) % WORDS_TO_ANIMATE.length)
+    }, WORD_CHANGE_INTERVAL_MS)
+
+    return () => clearInterval(wordTimeout)
+  }, [])
+
+  return (
+    <h2 id="TitleText">
+      <span className={fadeProp.fade}>{WORDS_TO_ANIMATE[wordOrder]}</span>, I'm Arief.
+    </h2>
+  )
+}
+
 const ShaderPlane = ({ vertex, fragment }) => {
   const meshRef = useRef();
 
@@ -99,7 +132,7 @@ const ViewportDemoWebGL = ({ el }) => {
         <>
           <mesh position-y={0.5}>
             {/* <boxGeometry /> */}
-            <TitleText />
+            {/* <TitleText el={undefined} /> */}
 
             <ShaderPlane vertex={vertex} fragment={fragment} />
 
@@ -196,12 +229,14 @@ function VerticalParallax({ children }) {
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-   <>
-   <SmoothScrollbar>
+    <>
+      <SmoothScrollbar>
         {(bind) => (
           <article {...bind}>
-            <ViewportDemo />
-
+            <article id="TitleContainer">
+              <AnimatedText />
+              <ViewportDemo />
+            </article>
             {/* <header>@14islands/r3f-scroll-rig + Framer Motion</header> */}
 
             <section>
@@ -246,7 +281,7 @@ const IndexPage: React.FC<PageProps> = () => {
           </article>
         )}
       </SmoothScrollbar>
-   </>
+    </>
   )
 }
 
