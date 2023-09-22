@@ -5,7 +5,7 @@ import { useFrame, useLoader, extend, useThree } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { GlobalCanvas, ViewportScrollScene, ScrollScene, UseCanvas, SmoothScrollbar, useTracker } from '@14islands/r3f-scroll-rig'
-import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture } from '@react-three/drei'
+import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress } from '@react-three/drei'
 import * as THREE from 'three'
 import { Model } from '../components/Untitled'
 import myFont from '../assets/fonts/XYBER_Regular.json'
@@ -14,6 +14,7 @@ import '@14islands/r3f-scroll-rig/css'
 import { useTrackerMotionValue } from '../components/useTrackerMotionValue'
 import { motion, useTransform } from 'framer-motion'
 import { WaveMaterial } from '../components/WaveMaterial'
+import { a, useTransition } from "@react-spring/web";
 import { easing } from 'maath'
 import axios from "axios";
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
@@ -52,7 +53,26 @@ export const AnimatedText = () => {
   )
 }
 
-const ShaderPlane = ({ vertex, fragment }) => {
+const Loader = () => {
+  const { active, progress } = useProgress();
+  const transition = useTransition(active, {
+    from: { opacity: 1, progress: 0 },
+    leave: { opacity: 0 },
+    update: { progress },
+  });
+  return transition(
+    ({ progress, opacity }, active) =>
+      active && (
+        <a.div className='loading' style={{ opacity }}>
+          <div className='loading-bar-container'>
+            <a.div className='loading-bar' style={{ width: progress }}></a.div>
+          </div>
+        </a.div>
+      )
+  );
+}
+
+const ShaderPlane = ({ vertex, fragment }: {vertex: string; fragment:string}) => {
   const meshRef = useRef();
   let ratio
 
@@ -287,6 +307,7 @@ const IndexPage: React.FC<PageProps> = () => {
           </article>
         )}
       </SmoothScrollbar>
+      <Loader />
     </>
   )
 }
