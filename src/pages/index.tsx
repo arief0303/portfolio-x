@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import { useRef, useEffect, useState, useMemo } from 'react'
+import { useRef, useEffect, useState, useMemo, MutableRefObject } from 'react'
 import { useFrame, useLoader, extend, useThree } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -72,8 +72,8 @@ const Loader = () => {
   );
 }
 
-const ShaderPlane = ({ vertex, fragment }: {vertex: string; fragment:string}) => {
-  const meshRef = useRef();
+const ShaderPlane = ({ vertex, fragment, position }: { vertex: string; fragment: string; position: Array<number> }) => {
+  const meshRef = useRef(null);
   let ratio
 
   if (window.innerWidth < 600) {
@@ -126,7 +126,7 @@ const ShaderPlane = ({ vertex, fragment }: {vertex: string; fragment:string}) =>
 };
 
 const ViewportDemo = () => {
-  const el = useRef()
+  const el = useRef(null)
   return (
     <>
       <section ref={el} className="TitleArea Debug">
@@ -139,7 +139,7 @@ const ViewportDemo = () => {
   )
 }
 
-const ViewportDemoWebGL = ({ el }) => {
+const ViewportDemoWebGL = ({ el }: { el: any; }) => {
   // State variables to store the vertex and fragment shaders as strings
   const [vertex, setVertex] = useState("");
   const [fragment, setFragment] = useState("");
@@ -193,7 +193,7 @@ const ViewportDemoWebGL = ({ el }) => {
   )
 }
 
-const TitleText = ({ el }) => {
+const TitleText = ({ el }: { el: string }) => {
   let size
   let font = "/fonts/XYBER - Regular.otf"
 
@@ -221,8 +221,8 @@ const TitleText = ({ el }) => {
   )
 } */
 
-function HorizontalMarquee({children}) {
-  const el = useRef()
+function HorizontalMarquee({ children }: { children: string }) {
+  const el = useRef<HTMLElement>(null!)
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
 
@@ -237,8 +237,8 @@ function HorizontalMarquee({children}) {
   )
 }
 
-function VerticalParallax({ children }) {
-  const el = useRef()
+function VerticalParallax({ children }: { children: string }) {
+  const el = useRef<HTMLElement>(null!)
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
 
@@ -305,11 +305,11 @@ const IndexPage: React.FC<PageProps> = () => {
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
             <section>
-              <img src="/images/image1.png"></img>
+              {/* <img src="/images/image1.png"></img>
               <br />
               <img src="/images/image2.png"></img>
               <br />
-              <img src="/images/image3.png"></img>
+              <img src="/images/image3.png"></img> */}
             </section>
             <section>&nbsp;</section>
           </article>
