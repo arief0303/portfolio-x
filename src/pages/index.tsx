@@ -221,7 +221,7 @@ const TitleText = ({ el }) => {
   )
 } */
 
-function HorizontalMarquee() {
+function HorizontalMarquee({children}) {
   const el = useRef()
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
@@ -231,7 +231,7 @@ function HorizontalMarquee() {
   return (
     <section ref={el} className="Marquee Debug">
       <motion.div style={{ x }}>
-        <h1>TEXT BIG TEXT BIG TEXT</h1>
+        <h1>{children}</h1>
       </motion.div>
     </section>
   )
@@ -280,13 +280,13 @@ const IndexPage: React.FC<PageProps> = () => {
             {/* <section>&nbsp;</section> */}
 
 
-            <VerticalParallax>Vertical Text</VerticalParallax>
+            <VerticalParallax>ABOUT</VerticalParallax>
 
-            <section>
+            {/* <section>
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
-            </section>
+            </section> */}
 
-            <HorizontalMarquee>R3F Scroll Rig</HorizontalMarquee>
+            <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
 
             <section>&nbsp;</section>
             {/* <header>
@@ -304,7 +304,13 @@ const IndexPage: React.FC<PageProps> = () => {
               </section>
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
-
+            <section>
+              <img src="/images/image1.png"></img>
+              <br />
+              <img src="/images/image2.png"></img>
+              <br />
+              <img src="/images/image3.png"></img>
+            </section>
             <section>&nbsp;</section>
           </article>
         )}
