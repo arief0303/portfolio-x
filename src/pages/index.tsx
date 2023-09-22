@@ -7,20 +7,22 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { GlobalCanvas, ViewportScrollScene, ScrollScene, UseCanvas, SmoothScrollbar, useTracker } from '@14islands/r3f-scroll-rig'
 import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress } from '@react-three/drei'
 import * as THREE from 'three'
+// @ts-ignore
 import { Model } from '../components/Untitled'
+// @ts-ignore
 import myFont from '../assets/fonts/XYBER_Regular.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import '@14islands/r3f-scroll-rig/css'
+// @ts-ignore
 import { useTrackerMotionValue } from '../components/useTrackerMotionValue'
 import { motion, useTransform } from 'framer-motion'
-import { WaveMaterial } from '../components/WaveMaterial'
 import { a, useTransition } from "@react-spring/web";
 import { easing } from 'maath'
 import axios from "axios";
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 extend({ TextGeometry })
 
-const FADE_INTERVAL_MS = 1750
+const FADE_INTERVAL_MS = 2000
 const WORD_CHANGE_INTERVAL_MS = FADE_INTERVAL_MS * 2
 const WORDS_TO_ANIMATE = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
 
@@ -205,21 +207,6 @@ const TitleText = ({ el }: { el: string }) => {
 
   return <Text font={font} fontSize={size}>Catalyst</Text>
 }
-
-/* function ShaderPlane() {
-  const ref = useRef()
-  const { viewport, size } = useThree()
-  useFrame((state, delta) => {
-    ref.current.time += delta
-    easing.damp3(ref.current.pointer, state.pointer, 0.2, delta)
-  })
-  return (
-    <mesh scale={[viewport.width * 2, viewport.height * 2, 1]}>
-      <planeGeometry />
-      <waveMaterial ref={ref} key={WaveMaterial.key} resolution={[size.width * viewport.dpr, size.height * viewport.dpr]} />
-    </mesh>
-  )
-} */
 
 function HorizontalMarquee({ children }: { children: string }) {
   const el = useRef<HTMLElement>(null!)

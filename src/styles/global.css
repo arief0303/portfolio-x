@@ -172,8 +172,9 @@ section.text {
 }
 
 .VerticalParallax {
+  background: #000;
   /* background: #222; */
-  background: linear-gradient(0deg, rgba(255,255,255,1) 62%, rgba(0,0,0,1) 99%);
+  /* background: linear-gradient(0deg, rgba(255,255,255,1) 62%, rgba(0,0,0,1) 99%); */
   height: 100vh;
   position: relative;
   overflow: hidden;
@@ -194,7 +195,6 @@ section.text {
   display: block;
   font-size: 10vw;
   /* color: deeppink; */
-  color: black;
   white-space: nowrap;
   writing-mode: vertical-lr;
   text-transform: uppercase;
@@ -236,12 +236,12 @@ section.text {
   } */
 
 .fade-in {
-  transition: opacity 1.5s ease;
+  transition: opacity 2s ease;
 }
 
 .fade-out {
   opacity: 0;
-  transition: opacity 1.5s ease;
+  transition: opacity 2s ease;
 }
 
 #TitleText {
