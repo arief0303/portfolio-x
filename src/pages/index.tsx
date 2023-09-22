@@ -88,7 +88,9 @@ const ShaderPlane = ({ vertex, fragment }: {vertex: string; fragment:string}) =>
     let time = state.clock.getElapsedTime();
 
     // start from 20 to skip first 20 seconds ( optional )
-    meshRef.current.material.uniforms.iTime.value = time + 20;
+    /* if (meshRef.current != undefined) {
+      meshRef.current.material.uniforms.iTime.value = time + 20;
+    } */
   });
 
   // Define the shader uniforms with memoization to optimize performance
