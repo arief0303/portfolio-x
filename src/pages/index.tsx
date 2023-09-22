@@ -92,7 +92,7 @@ const ShaderPlane = ({ vertex, fragment }) => {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[4*ratio, 3*ratio]} />
+      <planeGeometry args={[4 * ratio, 3 * ratio]} />
       <shaderMaterial
         uniforms={uniforms}
         vertexShader={vertex}
@@ -137,13 +137,13 @@ const ViewportDemoWebGL = ({ el }) => {
     <ViewportScrollScene track={el} hideOffscreen={false}>
       {(props) => (
         <>
-          <mesh position-y={0.5}>
+          <mesh>
             {/* <boxGeometry /> */}
             {/* <TitleText el={undefined} /> */}
 
-            <ShaderPlane vertex={vertex} fragment={fragment} />
+            <ShaderPlane vertex={vertex} fragment={fragment} position={[0, -4, 0]} />
 
-            <Model rotation={[0, 180, 0]} scale={0.4} />
+            <Model rotation={[0, 180, 0]} scale={0.7} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
