@@ -50,7 +50,7 @@ const WordFade = ({ words = [], duration = 3000 }) => {
           key={i}
           className={`word ${i === index ? 'fade-in' : 'fade-out'}`}
         >
-          {word}, I'm Arief"
+          {word}, I'm Arief.
         </div>
       ))}
     </div>
