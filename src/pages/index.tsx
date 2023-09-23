@@ -2,10 +2,10 @@ import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import { useRef, useEffect, useState, useMemo, MutableRefObject } from 'react'
 import { useFrame, useLoader, extend, useThree } from '@react-three/fiber'
-import { OrbitControls, useGLTF } from '@react-three/drei'
+import { OrbitControls, useGLTF, MeshDistortMaterial } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { GlobalCanvas, ViewportScrollScene, ScrollScene, UseCanvas, SmoothScrollbar, useTracker } from '@14islands/r3f-scroll-rig'
-import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress } from '@react-three/drei'
+import { GlobalCanvas, ViewportScrollScene, ScrollScene, UseCanvas, SmoothScrollbar, useTracker, useScrollRig, useImageAsTexture, styles } from '@14islands/r3f-scroll-rig'
+import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress, Box } from '@react-three/drei'
 import * as THREE from 'three'
 // @ts-ignore
 import { Model } from '../components/Untitled'
@@ -29,11 +29,11 @@ const texts = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo',
 const time_between_text = 2; // text show for 2s before fade out.
 const transition_duration = 0.5;
 
+const image1 = 'https://source.unsplash.com/random/1600x1000/?abstract'
+
 type FadeProp = { fade: 'fade-in' | 'fade-out' }
 
-
-
-const WordFade = ({ words = [], duration = 3000 }) => {
+const WordFade = ({ words = [], duration = 3000 }: { words: string[]; duration: number }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export const AnimatedText = () => {
       <span className={fadeProp.fade}>{WORDS_TO_ANIMATE[wordOrder]}</span>, I'm Arief.
     </h2>
   )  */
-  const words = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻'];
+  const words: string[] = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻'];
   return <WordFade words={words} duration={2000} />;
 }
 
@@ -268,10 +268,69 @@ function VerticalParallax({ children }: { children: string }) {
       <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
         <h2>{children}</h2>
       </motion.div>
-      <motion.div className="Image" style={{ y: imageY }}></motion.div>
+      <motion.div className="Image" style={{ y: imageY }}>
+      </motion.div>
     </section>
   )
 }
+
+function LoadingIndicator({ scale }: { scale: any; }) {
+  const box = useRef<THREE.Mesh>(null!)
+  useFrame((_, delta) => {
+    box.current.rotation.x = box.current.rotation.y += delta * Math.PI
+  })
+  return (
+    <Box ref={box} scale={scale.xy.min() * 0.25}>
+      <meshNormalMaterial />
+    </Box>
+  )
+}
+
+function ExampleComponent({ src, position, loading = 'eager' }: { src: any; position?: THREE.Vector3 ;loading?: any; }) {
+  const el = useRef(null!)
+  const img = useRef(null!)
+  const { hasSmoothScrollbar } = useScrollRig()
+  return (
+    <>
+      <div ref={el} className="Placeholder ScrollScene">
+        <img className={styles.hiddenWhenSmooth} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
+      </div>
+      {hasSmoothScrollbar && (
+        <UseCanvas>
+          <ScrollScene track={el} debug={false}>
+            {(props) => (
+              <React.Suspense fallback={<LoadingIndicator {...props} />}>
+                <WebGLImage position={position} imgRef={img} {...props} />
+              </React.Suspense>
+            )}
+          </ScrollScene>
+        </UseCanvas>
+      )}
+    </>
+  )
+}
+
+/* function WebGLImage({ imgRef, position, ...props }: { imgRef: any; position?: THREE.Vector3 }) {
+  // Load texture from the <img/> and suspend until its ready
+  const texture = useImageAsTexture(imgRef)
+  return (
+    <mesh position={position} {...props}>
+      <planeGeometry args={[1, 1, 16, 16]} />
+      <MeshDistortMaterial transparent map={texture} radius={0.99} distort={0.2} speed={3} />
+    </mesh>
+  )
+} */
+
+/* const WebGLImage = (image, index, offset, factor, header, aspect, text) => {
+  const size = aspect < 1 && !mobile ? 0.65 : 1
+
+
+  return (
+    // <Plane map={image} args={[1, 1, 32, 32]} shift={75} size={size} aspect={aspect} scale={[w * size, (w * size) / aspect, 1]} frustumCulled={false} />
+    <Plane map={image} args={[1, 1, 32, 32]} shift={75} size={size} aspect={aspect} scale={[w * size, (w * size) / aspect, 1]} frustumCulled={false} />
+  )
+}
+*/
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -284,7 +343,6 @@ const IndexPage: React.FC<PageProps> = () => {
               <ViewportDemo />
             </article>
             {/* <header>@14islands/r3f-scroll-rig + Framer Motion</header> */}
-
             <section>
               {/* <h1>HTML parallax with useTracker() and Framer Motion</h1> */}
             </section>
@@ -298,7 +356,13 @@ const IndexPage: React.FC<PageProps> = () => {
             {/* <section>&nbsp;</section> */}
 
 
-            <VerticalParallax>ABOUT</VerticalParallax>
+            <section>
+              <VerticalParallax>ABOUT</VerticalParallax>
+            </section>
+
+            {/* <section>
+              <ExampleComponent src={image1} position={new THREE.Vector3(-4,-1000,-10)} />
+            </section> */}
 
             {/* <section>
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
@@ -323,11 +387,11 @@ const IndexPage: React.FC<PageProps> = () => {
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
             <section>
-              {/* <img src="/images/image1.png"></img>
+              <img src="/images/image1.png"></img>
               <br />
               <img src="/images/image2.png"></img>
               <br />
-              <img src="/images/image3.png"></img> */}
+              <img src="/images/image3.png"></img>
             </section>
             <section>&nbsp;</section>
           </article>
