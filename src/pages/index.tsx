@@ -30,6 +30,9 @@ const time_between_text = 2; // text show for 2s before fade out.
 const transition_duration = 0.5;
 
 const image1 = '/images/0005.JPG'
+const image2 = 'https://source.unsplash.com/random/1600x1000/?cyberpunk'
+const image3 = 'https://source.unsplash.com/random/1600x1000/?scifi'
+const image4 = 'https://source.unsplash.com/random/1600x1000/?synthwave'
 
 type FadeProp = { fade: 'fade-in' | 'fade-out' }
 
@@ -443,11 +446,18 @@ const IndexPage: React.FC<PageProps> = () => {
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
             <section>
-              <img src="/images/image1.png"></img>
+              {/* <img src="/images/image1.png"></img>
               <br />
               <img src="/images/image2.png"></img>
               <br />
-              <img src="/images/image3.png"></img>
+              <img src="/images/image3.png"></img> */}
+              <img src={image2} />
+              <br />
+              <img src={image3} />
+              <br />
+              <img src={image4} />
+
+              
             </section>
             <section>&nbsp;</section>
           </article>
