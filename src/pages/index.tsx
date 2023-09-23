@@ -29,7 +29,7 @@ const texts = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo',
 const time_between_text = 2; // text show for 2s before fade out.
 const transition_duration = 0.5;
 
-const image1 = 'https://source.unsplash.com/random/1600x1000/?abstract'
+const image1 = '/images/0005.JPG'
 
 type FadeProp = { fade: 'fade-in' | 'fade-out' }
 
@@ -264,21 +264,15 @@ function VerticalParallax({ children, ...props }: { children: string }) {
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
   return (
-    <>
-      <section ref={el} className="VerticalParallax Debug">
-        <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
-          <h2>{children}</h2>
-        </motion.div>
 
-        <WebGLImageContainer id="someRandomID" />
-        {/* <motion.div className="Image" style={{ y: imageY }}>
-          <WebGLImageContainer id="someRandomID" />
-        </motion.div> */}
-
-        {/* <WebGLImageContainer id="someRandomID" /> */}
-        {/* <WebGLImageContainer id="someRandomID" /> */}
-      </section>
-    </>
+    <section ref={el} className="VerticalParallax Debug">
+      <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
+        <h2>{children}</h2>
+      </motion.div>
+      <motion.div className="Image" style={{ y: imageY }}>
+        <WebGLImageContainer src={image1} />
+      </motion.div>
+    </section>
   )
 }
 
@@ -340,28 +334,57 @@ function WebGLImage({ imgRef, position, ...props }: { imgRef: any; position?: nu
 }
 */
 
-const WebGLImageContainer = ({ id }: { id: string }) => {
+/* const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id: string; src: string; loading: string }) => {
   const el = useRef(null!)
+  const img = useRef()
+  const { hasSmoothScrollbar } = useScrollRig()
   return (
     <>
-      <div id={id} ref={el} className="Placeholder ScrollScene">
+      {hasSmoothScrollbar && (
+        <div id={id} ref={el} className="Placeholder ScrollScene">
+          <img className={styles.hiddenWhenSmooth} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
+          <UseCanvas>
+            <ScrollScene track={el}>
+              {(props) => (
+                <mesh {...props}>
+                  <planeGeometry args={[1, 1, 16, 16]} />
+                  <MeshDistortMaterial speed={5} distort={0.2}>
+                    <GradientTexture
+                      stops={[0, 1]} // As many stops as you want
+                      colors={['magenta', 'turquoise']} // Colors need to match the number of stops
+                      rotation={0.5}
+                    />
+                  </MeshDistortMaterial>
+                </mesh>
+              )}
+            </ScrollScene>
+          </UseCanvas>
+        </div>
+    )}
+    </>
+  )
+} */
+
+const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id: string; src: string; loading: any }) => {
+  const el = useRef(null!)
+  const img = useRef(null)
+  const { hasSmoothScrollbar } = useScrollRig()
+  return (
+    <>
+      <div ref={el} className="Placeholder ScrollScene">
+        <img className={styles.hiddenWhenSmooth} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
+      </div>
+      {/* {hasSmoothScrollbar && (
         <UseCanvas>
-          <ScrollScene track={el}>
+          <ScrollScene track={el} debug={false}>
             {(props) => (
-              <mesh {...props}>
-                <planeGeometry args={[1, 1, 16, 16]} />
-                <MeshDistortMaterial speed={5} distort={0.2}>
-                  <GradientTexture
-                    stops={[0, 1]} // As many stops as you want
-                    colors={['magenta', 'turquoise']} // Colors need to match the number of stops
-                    rotation={0.5}
-                  />
-                </MeshDistortMaterial>
-              </mesh>
+              <React.Suspense fallback={<LoadingIndicator {...props} />}>
+                <WebGLImage imgRef={img} {...props} />
+              </React.Suspense>
             )}
           </ScrollScene>
         </UseCanvas>
-      </div>
+      )} */}
     </>
   )
 }
@@ -378,11 +401,11 @@ const IndexPage: React.FC<PageProps> = () => {
             </article>
             {/* <header>@14islands/r3f-scroll-rig + Framer Motion</header> */}
             {/* <section> */}
-              {/* <h1>HTML parallax with useTracker() and Framer Motion</h1> */}
+            {/* <h1>HTML parallax with useTracker() and Framer Motion</h1> */}
             {/* </section> */}
 
             {/* <section> */}
-              {/* <p>
+            {/* <p>
                 The <code>useTracker()</code> can be used by regular HTML components to get their progress through the viewport.
               </p> */}
             {/* </section> */}
