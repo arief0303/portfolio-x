@@ -249,8 +249,6 @@ section.text {
   position: absolute;
   top:67vh;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 #TitleContainer {
@@ -279,4 +277,24 @@ section.text {
 .loading-bar {
   height: 32px;
   background: #fff;
+}
+
+.word-fade {
+  height: 1.2em;
+}
+
+.word {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }

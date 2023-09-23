@@ -25,11 +25,40 @@ extend({ TextGeometry })
 const FADE_INTERVAL_MS = 2000
 const WORD_CHANGE_INTERVAL_MS = FADE_INTERVAL_MS * 2
 const WORDS_TO_ANIMATE = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
+const texts = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
+const time_between_text = 2; // text show for 2s before fade out.
+const transition_duration = 0.5;
 
 type FadeProp = { fade: 'fade-in' | 'fade-out' }
 
+
+
+const WordFade = ({ words = [], duration = 3000 }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, duration);
+    return () => clearInterval(interval);
+  }, [words, duration]);
+
+  return (
+    <div id="TitleText" className="word-fade">
+      {words.map((word, i) => (
+        <div
+          key={i}
+          className={`word ${i === index ? 'fade-in' : 'fade-out'}`}
+        >
+          {word}, I'm Arief"
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const AnimatedText = () => {
-  const [fadeProp, setFadeProp] = useState<FadeProp>({ fade: 'fade-in' })
+  /* const [fadeProp, setFadeProp] = useState<FadeProp>({ fade: 'fade-in' })
   const [wordOrder, setWordOrder] = useState(0)
 
   useEffect(() => {
@@ -52,7 +81,9 @@ export const AnimatedText = () => {
     <h2 id="TitleText">
       <span className={fadeProp.fade}>{WORDS_TO_ANIMATE[wordOrder]}</span>, I'm Arief.
     </h2>
-  )
+  )  */
+  const words = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻'];
+  return <WordFade words={words} duration={2000} />;
 }
 
 const Loader = () => {
