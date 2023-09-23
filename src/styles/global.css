@@ -74,8 +74,7 @@ section.text {
 
 .ScrollScene,
 .ViewportScrollScene {
-  /* outline: 1px dashed rgba(255, 255, 255, 0.33); */
-  /* position: relative; */
+  outline: 1px dashed rgba(255, 255, 255, 0.33);
   position: absolute;
   top: 0;
   left: 0;
@@ -183,6 +182,7 @@ section.text {
   align-items: center;
   justify-content: center;
   padding-right: 25vw;
+  z-index: -999
 }
 
 .VerticalParallaxMotion {
@@ -210,14 +210,14 @@ section.text {
 }
 
 .Image {
-  width: 90vh;
-  height: 50vh;
-  background: turquoise;
+  width: 100vw;
+  height: 100vh;
+  /* background: turquoise; */
 }
 
 /* Debug styles */
 .Debug {
-  /* outline: 1px dashed rgba(255, 255, 255, 0.33); */
+  outline: 1px dashed rgba(255, 255, 255, 0.33);
   position: relative;
 }
 .Debug:after {
@@ -247,7 +247,7 @@ section.text {
 #TitleText {
   margin: 0;
   position: absolute;
-  top:67vh;
+  top: 67vh;
   left: 50%;
 }
 
@@ -297,4 +297,41 @@ section.text {
 
 .fade-out {
   opacity: 0;
+}
+
+.Placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  aspect-ratio: 16/10;
+}
+
+#someRandomID {
+  width: 56vw;
+  height: 45vh;
+  /* right: 100px; */
+  transform: translate(5%, -25%);;
+}
+
+.ScrollScene,
+.ViewportScrollScene {
+  outline: 1px dashed rgba(255, 255, 255, 0.33);
+  position: relative;
+}
+.ScrollScene:after,
+.ViewportScrollScene:after {
+  content: "ScrollScene";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.33);
+  color: black;
+  font-size: 10px;
+  padding: 5px;
+}
+
+.ViewportScrollScene:after {
+  content: "ViewportScrollScene";
 }

@@ -5,7 +5,7 @@ import { useFrame, useLoader, extend, useThree } from '@react-three/fiber'
 import { OrbitControls, useGLTF, MeshDistortMaterial } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { GlobalCanvas, ViewportScrollScene, ScrollScene, UseCanvas, SmoothScrollbar, useTracker, useScrollRig, useImageAsTexture, styles } from '@14islands/r3f-scroll-rig'
-import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress, Box } from '@react-three/drei'
+import { PivotControls, MeshTransmissionMaterial, Grid, Environment, PerspectiveCamera, CameraControls, Text, Text3D, useTexture, useProgress, Box, GradientTexture } from '@react-three/drei'
 import * as THREE from 'three'
 // @ts-ignore
 import { Model } from '../components/Untitled'
@@ -179,7 +179,7 @@ const ViewportDemoWebGL = ({ el }: { el: any; }) => {
 
   // Fetch the shaders once the component mounts
   useEffect(() => {
-    // fetch the vertex and fragment shaders from public folder 
+    // fetch the vertex and fragment shaders from public folder
     axios.get("/vertexShader.glsl").then((res) => setVertex(res.data));
     axios.get("/fragmentShader.glsl").then((res) => setFragment(res.data));
   }, []);
@@ -216,7 +216,7 @@ const ViewportDemoWebGL = ({ el }: { el: any; }) => {
           </mesh>
           <Environment preset="dawn" />
           <PerspectiveCamera fov={14} position={[0, 0, 20]} makeDefault onUpdate={(self) => self.lookAt(0, 0, 0)} />
-          {/* OrbitControls add touchAction='none' to the canvas eventSource and never removes it after events.connected changes it 
+          {/* OrbitControls add touchAction='none' to the canvas eventSource and never removes it after events.connected changes it
               - need to manually pass in tracked domElement to keep touch scrolling working */}
           {/* <OrbitControls domElement={props.track.current} makeDefault enableZoom={false} /> */}
           {/* <CameraControls makeDefault /> */}
@@ -255,7 +255,7 @@ function HorizontalMarquee({ children }: { children: string }) {
   )
 }
 
-function VerticalParallax({ children }: { children: string }) {
+function VerticalParallax({ children, ...props }: { children: string }) {
   const el = useRef<HTMLElement>(null!)
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
@@ -264,13 +264,21 @@ function VerticalParallax({ children }: { children: string }) {
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
   return (
-    <section ref={el} className="VerticalParallax Debug">
-      <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
-        <h2>{children}</h2>
-      </motion.div>
-      <motion.div className="Image" style={{ y: imageY }}>
-      </motion.div>
-    </section>
+    <>
+      <section ref={el} className="VerticalParallax Debug">
+        <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
+          <h2>{children}</h2>
+        </motion.div>
+
+        <WebGLImageContainer id="someRandomID" />
+        {/* <motion.div className="Image" style={{ y: imageY }}>
+          <WebGLImageContainer id="someRandomID" />
+        </motion.div> */}
+
+        {/* <WebGLImageContainer id="someRandomID" /> */}
+        {/* <WebGLImageContainer id="someRandomID" /> */}
+      </section>
+    </>
   )
 }
 
@@ -286,7 +294,7 @@ function LoadingIndicator({ scale }: { scale: any; }) {
   )
 }
 
-function ExampleComponent({ src, position, loading = 'eager' }: { src: any; position?: THREE.Vector3 ;loading?: any; }) {
+/* function WebGLImageContainer({ src, position, loading = 'eager' }: { src: any; position?: THREE.Vector3 ;loading?: any; }) {
   const el = useRef(null!)
   const img = useRef(null!)
   const { hasSmoothScrollbar } = useScrollRig()
@@ -308,18 +316,18 @@ function ExampleComponent({ src, position, loading = 'eager' }: { src: any; posi
       )}
     </>
   )
-}
+} */
 
-/* function WebGLImage({ imgRef, position, ...props }: { imgRef: any; position?: THREE.Vector3 }) {
+function WebGLImage({ imgRef, position, ...props }: { imgRef: any; position?: number[] }) {
   // Load texture from the <img/> and suspend until its ready
   const texture = useImageAsTexture(imgRef)
   return (
-    <mesh position={position} {...props}>
+    <mesh {...props}>
       <planeGeometry args={[1, 1, 16, 16]} />
       <MeshDistortMaterial transparent map={texture} radius={0.99} distort={0.2} speed={3} />
     </mesh>
   )
-} */
+}
 
 /* const WebGLImage = (image, index, offset, factor, header, aspect, text) => {
   const size = aspect < 1 && !mobile ? 0.65 : 1
@@ -332,6 +340,32 @@ function ExampleComponent({ src, position, loading = 'eager' }: { src: any; posi
 }
 */
 
+const WebGLImageContainer = ({ id }: { id: string }) => {
+  const el = useRef(null!)
+  return (
+    <>
+      <div id={id} ref={el} className="Placeholder ScrollScene">
+        <UseCanvas>
+          <ScrollScene track={el}>
+            {(props) => (
+              <mesh {...props}>
+                <planeGeometry args={[1, 1, 16, 16]} />
+                <MeshDistortMaterial speed={5} distort={0.2}>
+                  <GradientTexture
+                    stops={[0, 1]} // As many stops as you want
+                    colors={['magenta', 'turquoise']} // Colors need to match the number of stops
+                    rotation={0.5}
+                  />
+                </MeshDistortMaterial>
+              </mesh>
+            )}
+          </ScrollScene>
+        </UseCanvas>
+      </div>
+    </>
+  )
+}
+
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <>
@@ -343,15 +377,15 @@ const IndexPage: React.FC<PageProps> = () => {
               <ViewportDemo />
             </article>
             {/* <header>@14islands/r3f-scroll-rig + Framer Motion</header> */}
-            <section>
+            {/* <section> */}
               {/* <h1>HTML parallax with useTracker() and Framer Motion</h1> */}
-            </section>
+            {/* </section> */}
 
-            <section>
+            {/* <section> */}
               {/* <p>
                 The <code>useTracker()</code> can be used by regular HTML components to get their progress through the viewport.
               </p> */}
-            </section>
+            {/* </section> */}
 
             {/* <section>&nbsp;</section> */}
 
@@ -359,7 +393,6 @@ const IndexPage: React.FC<PageProps> = () => {
             <section>
               <VerticalParallax>ABOUT</VerticalParallax>
             </section>
-
             {/* <section>
               <ExampleComponent src={image1} position={new THREE.Vector3(-4,-1000,-10)} />
             </section> */}
