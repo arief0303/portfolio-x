@@ -258,6 +258,27 @@ function HorizontalMarquee({ children }: { children: string }) {
   )
 }
 
+function AboutSection({ id, children, src, ...props }: { id:string; children: string, src: string }) {
+  const el = useRef<HTMLElement>(null!)
+  const tracker = useTracker(el)
+  const progress = useTrackerMotionValue(tracker)
+
+  const textY = useTransform(progress, [0, 1], ['25%', '-25%'])
+  const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
+
+  return (
+
+    <section ref={el} className="VerticalParallax Debug">
+      <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
+        <h2>{children}</h2>
+      </motion.div>
+      <motion.div className="Image" style={{ y: imageY }}>
+        <WebGLImageContainer src={src} id={id} />
+      </motion.div>
+    </section>
+  )
+}
+
 function VerticalParallax({ children, ...props }: { children: string }) {
   const el = useRef<HTMLElement>(null!)
   const tracker = useTracker(el)
@@ -368,14 +389,14 @@ function WebGLImage({ imgRef, position, ...props }: { imgRef: any; position?: nu
   )
 } */
 
-const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id: string; src: string; loading: any }) => {
+const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src: string; loading?: any }) => {
   const el = useRef(null!)
   const img = useRef(null)
   const { hasSmoothScrollbar } = useScrollRig()
   return (
     <>
       <div ref={el} className="Placeholder ScrollScene">
-        <img className={styles.hiddenWhenSmooth} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
+        <img className={styles.hiddenWhenSmooth} id={id} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
       </div>
       {/* {hasSmoothScrollbar && (
         <UseCanvas>
@@ -417,7 +438,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
 
             <section>
-              <VerticalParallax>ABOUT</VerticalParallax>
+              <AboutSection src={image1} id="ProfilePicture">ABOUT</AboutSection>
             </section>
             {/* <section>
               <ExampleComponent src={image1} position={new THREE.Vector3(-4,-1000,-10)} />
