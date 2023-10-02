@@ -182,7 +182,7 @@ section.text {
   align-items: center;
   justify-content: center;
   padding-right: 25vw;
-  z-index: -999
+  z-index: -999;
 }
 
 .VerticalParallaxMotion {
@@ -340,4 +340,30 @@ section.text {
 
 .ViewportScrollScene:after {
   content: "ViewportScrollScene";
+}
+
+#Bio {
+  /* position: absolute; */
+  /* padding: 0 5vw; */
+  /* background: rgba(0, 0, 0, 0.5); */
+  /* top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; */
+  text-align: justify;
+  width: 100vw;
+}
+
+.gradient-text {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #723BD9, #EDFFFF);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
 }

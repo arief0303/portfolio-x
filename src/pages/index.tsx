@@ -258,7 +258,7 @@ function HorizontalMarquee({ children }: { children: string }) {
   )
 }
 
-function AboutSection({ id, children, src, ...props }: { id:string; children: string, src: string }) {
+function AboutSection({ id, src, ...props }: { id: string, src: string }) {
   const el = useRef<HTMLElement>(null!)
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
@@ -266,16 +266,44 @@ function AboutSection({ id, children, src, ...props }: { id:string; children: st
   const textY = useTransform(progress, [0, 1], ['25%', '-25%'])
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
-  return (
+  const [ratio, setRatio] = useState("2.5vw");
 
-    <section ref={el} className="VerticalParallax Debug">
-      <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
-        <h2>{children}</h2>
-      </motion.div>
-      <motion.div className="Image" style={{ y: imageY }}>
-        <WebGLImageContainer src={src} id={id} />
-      </motion.div>
-    </section>
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 600) {
+        setRatio("5vw");
+      } else {
+        setRatio("2.5vw");
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <section ref={el} className="VerticalParallax Debug">
+        <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
+          <h2 className="gradient-text">About</h2>
+        </motion.div>
+        <motion.div className="Image" style={{ y: imageY }}>
+          <WebGLImageContainer src={src} id={id} />
+        </motion.div>
+      </section>
+      <section>
+        <div id="Bio">
+          <p style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
+            I enjoy designing and developing interactive applications that combine aesthetics and functionality.
+            I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
+            , Vue.js, React.js, Maya, Blender, & Unity.
+          </p>
+        </div>
+      </section>
+    </>
   )
 }
 
@@ -438,7 +466,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
 
             <section>
-              <AboutSection src={image1} id="ProfilePicture">ABOUT</AboutSection>
+              <AboutSection src={image1} id="ProfilePicture" />
             </section>
             {/* <section>
               <ExampleComponent src={image1} position={new THREE.Vector3(-4,-1000,-10)} />
@@ -478,7 +506,7 @@ const IndexPage: React.FC<PageProps> = () => {
               <br />
               <img src={image4} />
 
-              
+
             </section>
             <section>&nbsp;</section>
           </article>
