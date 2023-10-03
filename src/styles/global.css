@@ -342,20 +342,36 @@ section.text {
   content: "ViewportScrollScene";
 }
 
+#BioContainer {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  /* right: 100px; */
+  /* transform: translate(5%, -25%);; */
+}
+
 #Bio {
+  flex: 1;
   /* position: absolute; */
   /* padding: 0 5vw; */
   /* background: rgba(0, 0, 0, 0.5); */
-  /* top: 0;
-  left: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100; */
+  /* top: 0; */
+  /* left: 0; */
+  /* height: 100%; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* z-index: 100; */
   text-align: justify;
-  width: 100vw;
+  width: 50vw;
+}
+
+#Placeholder {
+  flex: 2;
+  /* background: red; */
+  width: 100%;
+  height: 100rm;
 }
 
 .gradient-text {

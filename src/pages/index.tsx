@@ -10,6 +10,8 @@ import * as THREE from 'three'
 // @ts-ignore
 import { Model } from '../components/Untitled'
 // @ts-ignore
+import { Diamond } from '../components/Diamond'
+// @ts-ignore
 import myFont from '../assets/fonts/XYBER_Regular.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import '@14islands/r3f-scroll-rig/css'
@@ -168,14 +170,28 @@ const ViewportDemo = () => {
       <section ref={el} className="TitleArea Debug">
         <div ref={el} className="Placeholder ViewportScrollScene" style={{ touchAction: 'pan-x' }}></div>
         <UseCanvas>
-          <ViewportDemoWebGL el={el} />
+          <Viewport el={el} />
         </UseCanvas>
       </section>
     </>
   )
 }
 
-const ViewportDemoWebGL = ({ el }: { el: any; }) => {
+const ViewportDemo2 = () => {
+  const el = useRef(null)
+  return (
+    <>
+      <section ref={el} className="TitleArea Debug">
+        <div ref={el} className="Placeholder ViewportScrollScene" style={{ touchAction: 'pan-x' }}></div>
+        <UseCanvas>
+          <Viewport2 el={el} />
+        </UseCanvas>
+      </section>
+    </>
+  )
+}
+
+const Viewport = ({ el }: { el: any; }) => {
   // State variables to store the vertex and fragment shaders as strings
   const [vertex, setVertex] = useState("");
   const [fragment, setFragment] = useState("");
@@ -202,6 +218,62 @@ const ViewportDemoWebGL = ({ el }: { el: any; }) => {
             <ShaderPlane vertex={vertex} fragment={fragment} position={[0, -4, 0]} />
 
             <Model rotation={[0, 180, 0]} scale={0.7} />
+
+            <MeshTransmissionMaterial
+              chromaticAberration={1}
+              thickness={0.3}
+              transmission={1}
+              anisotropy={0.5}
+              distortion={5}
+              distortionScale={1.5}
+              temporalDistortion={0.1}
+              metalness={0.1}
+              backside
+              resolution={256}
+              backsideResolution={256}
+            />
+          </mesh>
+          <Environment preset="dawn" />
+          <PerspectiveCamera fov={14} position={[0, 0, 20]} makeDefault onUpdate={(self) => self.lookAt(0, 0, 0)} />
+          {/* OrbitControls add touchAction='none' to the canvas eventSource and never removes it after events.connected changes it
+              - need to manually pass in tracked domElement to keep touch scrolling working */}
+          {/* <OrbitControls domElement={props.track.current} makeDefault enableZoom={false} /> */}
+          {/* <CameraControls makeDefault /> */}
+        </>
+      )}
+    </ViewportScrollScene>
+  )
+}
+
+const Viewport2 = ({ el }: { el: any; }) => {
+  // State variables to store the vertex and fragment shaders as strings
+  const [vertex, setVertex] = useState("");
+  const [fragment, setFragment] = useState("");
+
+  // Fetch the shaders once the component mounts
+  useEffect(() => {
+    // fetch the vertex and fragment shaders from public folder
+    axios.get("/vertexShader.glsl").then((res) => setVertex(res.data));
+    axios.get("/fragmentShader.glsl").then((res) => setFragment(res.data));
+  }, []);
+
+  // If the shaders are not loaded yet, return null (nothing will be rendered)
+  if (vertex == "" || fragment == "") return null;
+
+  return (
+    /* Disable hideOffscreen to avoid jank */
+    <ViewportScrollScene track={el} hideOffscreen={false}>
+      {(props) => (
+        <>
+          <mesh>
+            <boxGeometry />
+            {/* <TitleText el={undefined} /> */}
+
+            {/* <ShaderPlane vertex={vertex} fragment={fragment} position={[0, -4, 0]} /> */}
+
+            {/* <Model rotation={[0, 180, 0]} scale={0.7} /> */}
+
+            {/* <Diamond position={[0, 0, 0]} /> */}
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
@@ -295,12 +367,13 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
         </motion.div>
       </section>
       <section>
-        <div id="Bio">
-          <p style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
+        <div id="BioContainer">
+          <p id="Bio" style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
             I enjoy designing and developing interactive applications that combine aesthetics and functionality.
             I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
             , Vue.js, React.js, Maya, Blender, & Unity.
           </p>
+          <div id="Placeholder"><ViewportDemo2 /></div>
         </div>
       </section>
     </>
