@@ -13,6 +13,7 @@ export function Model(props) {
   useEffect(() => {
     // console.log('animations', animations)
     // actions.KeyAction.play()
+    console.log("nodes ico", nodes)
   });
   return (
     <>

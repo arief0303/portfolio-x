@@ -266,14 +266,14 @@ const Viewport2 = ({ el }: { el: any; }) => {
       {(props) => (
         <>
           <mesh>
-            <boxGeometry />
+            {/* <boxGeometry /> */}
             {/* <TitleText el={undefined} /> */}
 
             {/* <ShaderPlane vertex={vertex} fragment={fragment} position={[0, -4, 0]} /> */}
 
             {/* <Model rotation={[0, 180, 0]} scale={0.7} /> */}
 
-            {/* <Diamond position={[0, 0, 0]} /> */}
+            <Diamond position={[0, 0, 0]} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}

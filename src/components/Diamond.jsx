@@ -13,13 +13,15 @@ export function Diamond(props) {
   useEffect(() => {
     // console.log('animations', animations)
     // actions.KeyAction.play()
+    console.log("nodes diamond", nodes)
   });
   return (
     <>
       <Float>
         <group ref={group} {...props} dispose={null}>
           <group name="Scene">
-            {/* <mesh name="Icosphere" geometry={nodes.Icosphere.geometry} material={materials['Material.001']} morphTargetDictionary={nodes.Icosphere.morphTargetDictionary} morphTargetInfluences={nodes.Icosphere.morphTargetInfluences}>
+            <mesh name="Diamond" geometry={nodes.pCone1_lambert1_0.geometry} material={materials['Material.001']} morphTargetDictionary={nodes.pCone1_lambert1_0.morphTargetDictionary} morphTargetInfluences={nodes.pCone1_lambert1_0.morphTargetInfluences}>
+            {/* <mesh name="Diamond"> */}
               <MeshTransmissionMaterial
                 chromaticAberration={1}
                 thickness={0.3}
@@ -33,9 +35,7 @@ export function Diamond(props) {
                 resolution={256}
                 backsideResolution={256}
               />
-            </mesh> */}
-            <mesh name="Diamond" geometry={nodes.Diamond.geometry} material={materials['Material.001']} morphTargetDictionary={nodes.Diamond.morphTargetDictionary} morphTargetInfluences={nodes.Diamond.morphTargetInfluences}>
-          </mesh>
+            </mesh>
           </group>
         </group>
       </Float>
