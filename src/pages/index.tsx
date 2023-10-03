@@ -32,9 +32,12 @@ const time_between_text = 2; // text show for 2s before fade out.
 const transition_duration = 0.5;
 
 const image1 = '/images/0005.JPG'
-const image2 = 'https://source.unsplash.com/random/1600x1000/?cyberpunk'
-const image3 = 'https://source.unsplash.com/random/1600x1000/?scifi'
-const image4 = 'https://source.unsplash.com/random/1600x1000/?synthwave'
+const image2 = '/images/screenshot1.png'
+const image3 = '/images/image1.png'
+const image4 = '/images/image3.png'
+// const image2 = 'https://source.unsplash.com/random/1600x1000/?cyberpunk'
+// const image3 = 'https://source.unsplash.com/random/1600x1000/?scifi'
+// const image4 = 'https://source.unsplash.com/random/1600x1000/?synthwave'
 
 type FadeProp = { fade: 'fade-in' | 'fade-out' }
 
