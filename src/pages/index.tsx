@@ -273,7 +273,8 @@ const Viewport2 = ({ el }: { el: any; }) => {
 
             {/* <Model rotation={[0, 180, 0]} scale={0.7} /> */}
 
-            <Diamond position={[0, 0, 0]} />
+            {/* <Diamond position={[1.25, -0.5, 0]} scale={0.37} /> */}
+            <Diamond position={[1.8, -1.6, 0]} scale={0.5} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
@@ -345,7 +346,7 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
       if (window.innerWidth < 600) {
         setRatio("5vw");
       } else {
-        setRatio("2.5vw");
+        setRatio("2vw");
       }
     }
 

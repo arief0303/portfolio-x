@@ -343,10 +343,10 @@ section.text {
 }
 
 #BioContainer {
-  position: relative;
   width: 100vw;
   height: 100%;
   display: flex;
+  margin-bottom: 10vh;
   /* right: 100px; */
   /* transform: translate(5%, -25%);; */
 }
@@ -364,14 +364,17 @@ section.text {
   /* justify-content: center; */
   /* z-index: 100; */
   text-align: justify;
-  width: 50vw;
+  flex: 0 0 17.5em;
+
+  /* width: 50vw; */
 }
 
 #Placeholder {
   flex: 2;
   /* background: red; */
   width: 100%;
-  height: 100rm;
+  height: 100;
+  position: absolute;
 }
 
 .gradient-text {
