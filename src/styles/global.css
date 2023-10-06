@@ -63,15 +63,6 @@ section.text {
   font-size: 16px;
 }
 
-.Placeholder {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  aspect-ratio: 16/10;
-}
-
 .ScrollScene,
 .ViewportScrollScene {
   outline: 1px dashed rgba(255, 255, 255, 0.33);
@@ -202,11 +193,11 @@ section.text {
 }
 
 .TitleArea {
-  position: absolute;
+  /* position: absolute;
   min-height: 100%;
   right: 0;
   height: 100vh;
-  margin: 0;
+  margin: 0; */
 }
 
 .Image {
@@ -300,12 +291,12 @@ section.text {
 }
 
 .Placeholder {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  aspect-ratio: 16/10;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  /* width: 100%; */
+  /* aspect-ratio: 16/10; */
 }
 
 #someRandomID {
@@ -343,15 +334,17 @@ section.text {
 }
 
 #BioContainer {
-  width: 100vw;
-  height: 100%;
+  /* width: 100vw; */
+  /* height: 100%; */
   display: flex;
-  margin-bottom: 10vh;
+  margin: 5vw 5vw 5vw 5vw
   /* right: 100px; */
   /* transform: translate(5%, -25%);; */
 }
 
-#Bio {
+#Bio
+ {
+  outline: 1px dashed rgba(255, 255, 255, 0.33);
   flex: 1;
   /* position: absolute; */
   /* padding: 0 5vw; */
@@ -364,17 +357,32 @@ section.text {
   /* justify-content: center; */
   /* z-index: 100; */
   text-align: justify;
-  flex: 0 0 17.5em;
+  /* flex: 0 0 17.5em; */
 
   /* width: 50vw; */
 }
 
-#Placeholder {
-  flex: 2;
-  /* background: red; */
+#SphereGeometry {
+  /* position: absolute; */
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  aspect-ratio: 16/10; 
   width: 100%;
   height: 100;
-  position: absolute;
+  position: absolute; */
+  /* position: relative; */
+  width: 50%;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .SphereGeometry {
+    /* z-index: -1; */
+    /* position: absolute; */
+  }
 }
 
 .gradient-text {

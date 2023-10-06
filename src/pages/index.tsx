@@ -12,6 +12,8 @@ import { Model } from '../components/Untitled'
 // @ts-ignore
 import { Diamond } from '../components/Diamond'
 // @ts-ignore
+import { Sphere } from '../components/Sphere'
+// @ts-ignore
 import myFont from '../assets/fonts/XYBER_Regular.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import '@14islands/r3f-scroll-rig/css'
@@ -277,7 +279,8 @@ const Viewport2 = ({ el }: { el: any; }) => {
             {/* <Model rotation={[0, 180, 0]} scale={0.7} /> */}
 
             {/* <Diamond position={[1.25, -0.5, 0]} scale={0.37} /> */}
-            <Diamond position={[1.8, -1.6, 0]} scale={0.5} />
+            {/* <Diamond position={[1.8, -1.6, 0]} scale={0.5} /> */}
+            <Sphere args={[2, 32, 32]} position={[0,0,0]} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
@@ -377,7 +380,7 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
             I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
             , Vue.js, React.js, Maya, Blender, & Unity.
           </p>
-          <div id="Placeholder"><ViewportDemo2 /></div>
+          <div id="SphereGeometry"><ViewportDemo2 /></div>
         </div>
       </section>
     </>
