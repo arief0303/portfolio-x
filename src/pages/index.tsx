@@ -280,7 +280,7 @@ const Viewport2 = ({ el }: { el: any; }) => {
 
             {/* <Diamond position={[1.25, -0.5, 0]} scale={0.37} /> */}
             {/* <Diamond position={[1.8, -1.6, 0]} scale={0.5} /> */}
-            <Sphere args={[2, 32, 32]} position={[0,0,0]} />
+            <Sphere args={[2, 32, 32]} position={[0, 0, 0]} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
@@ -345,14 +345,15 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
   const textY = useTransform(progress, [0, 1], ['25%', '-25%'])
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
-  const [ratio, setRatio] = useState("2.5vw");
+  const [ratio, setRatio] = useState();
 
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 600) {
-        setRatio("5vw");
+        // setRatio("5vw");
+        // document.getElementById("SphereViewport")!.style.zIndex = "-10";
       } else {
-        setRatio("2vw");
+        // setRatio("2vw");
       }
     }
 
@@ -374,14 +375,17 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
         </motion.div>
       </section>
       <section>
-        <div id="BioContainer">
-          <p id="Bio" style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
+        <div className="flex w-screen h-[50vh]">
+          <p className="text-base text-justify 2-[87vw]" style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
             I enjoy designing and developing interactive applications that combine aesthetics and functionality.
             I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
             , Vue.js, React.js, Maya, Blender, & Unity.
           </p>
-          <div id="SphereGeometry"><ViewportDemo2 /></div>
+          <div id="SphereViewport" className="absolute w-screen h-full -z-10">
+            <ViewportDemo2 />
+          </div>
         </div>
+        <section className="h-[25vh] bg-gradient-to-b from-transparent to-black">&nbsp;</section>
       </section>
     </>
   )
@@ -548,6 +552,9 @@ const IndexPage: React.FC<PageProps> = () => {
             <section>
               <AboutSection src={image1} id="ProfilePicture" />
             </section>
+
+            {/* <section>&nbsp;</section> */}
+
             {/* <section>
               <ExampleComponent src={image1} position={new THREE.Vector3(-4,-1000,-10)} />
             </section> */}
@@ -555,17 +562,18 @@ const IndexPage: React.FC<PageProps> = () => {
             {/* <section>
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
             </section> */}
-
-            <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
-
-            <section>&nbsp;</section>
-            {/* <header>
+            <article className="bg-black">
+              <section>
+                <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
+              </section>
+              <section>&nbsp;</section>
+              {/* <header>
               <h1>Project Catalyst</h1>
             </header>
             <section>
               <h1>Basic &lt;ScrollScene/&gt; example</h1>
             </section> */}
-            {/* {isTouch && (
+              {/* {isTouch && (
               <section>
                 <p style={{ color: 'orange' }}>
                   You are on a touch device which means the WebGL won't sync with the native scroll. Consider disabling ScrollScenes for
@@ -574,21 +582,20 @@ const IndexPage: React.FC<PageProps> = () => {
               </section>
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
-            <section>
-              {/* <img src="/images/image1.png"></img>
+              <section>
+                {/* <img src="/images/image1.png"></img>
               <br />
               <img src="/images/image2.png"></img>
               <br />
               <img src="/images/image3.png"></img> */}
-              <img src={image2} />
-              <br />
-              <img src={image3} />
-              <br />
-              <img src={image4} />
-
-
-            </section>
-            <section>&nbsp;</section>
+                <img src={image2} />
+                <br />
+                <img src={image3} />
+                <br />
+                <img src={image4} />
+              </section>
+              {/* <section>&nbsp;</section> */}
+            </article>
           </article>
         )}
       </SmoothScrollbar>

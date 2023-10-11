@@ -5,7 +5,15 @@ module.exports = {
     `./src/components/**/*.{js,jsx,ts,tsx}`,
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'transparent': 'transparent',
+        'black': '#000',
+      },
+      backgroundImage: theme => ({
+        'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
+      })
+    },
   },
   plugins: [],
 }
