@@ -65,7 +65,7 @@ section.text {
 
 .ScrollScene,
 .ViewportScrollScene {
-  outline: 1px dashed rgba(255, 255, 255, 0.33);
+  /* outline: 1px dashed rgba(255, 255, 255, 0.33); */
   position: absolute;
   top: 0;
   left: 0;
@@ -140,7 +140,7 @@ section.text {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  outline: 2px dashed turquoise;
+  /* outline: 2px dashed turquoise; */
 
   aspect-ratio: 16/10;
   margin: 10vw;
@@ -208,7 +208,7 @@ section.text {
 
 /* Debug styles */
 .Debug {
-  outline: 1px dashed rgba(255, 255, 255, 0.33);
+  /* outline: 1px dashed rgba(255, 255, 255, 0.33); */
   position: relative;
 }
 .Debug:after {
@@ -314,12 +314,12 @@ section.text {
 
 .ScrollScene,
 .ViewportScrollScene {
-  outline: 1px dashed rgba(255, 255, 255, 0.33);
+  /* outline: 1px dashed rgba(255, 255, 255, 0.33); */
   position: relative;
 }
 .ScrollScene:after,
 .ViewportScrollScene:after {
-  content: "ScrollScene";
+  /* content: "ScrollScene"; */
   position: absolute;
   left: 0;
   top: 0;
@@ -330,7 +330,7 @@ section.text {
 }
 
 .ViewportScrollScene:after {
-  content: "ViewportScrollScene";
+  /* content: "ViewportScrollScene"; */
 }
 
 #BioContainer {
