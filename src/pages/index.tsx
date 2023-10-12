@@ -633,10 +633,11 @@ const IndexPage: React.FC<PageProps> = () => {
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
             </section> */}
             <article className="bg-black">
-              <section>
+              <section className="h-screen w-screen">
                 <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
+                <Carousel />
               </section>
-              <section>&nbsp;</section>
+              {/* <section>&nbsp;</section> */}
               {/* <header>
               <h1>Project Catalyst</h1>
             </header>
@@ -664,7 +665,6 @@ const IndexPage: React.FC<PageProps> = () => {
                 <br />
                 <img src={image4} /> */}
 
-                <Carousel />
               </section>
               {/* <section>&nbsp;</section> */}
             </article>
