@@ -69,16 +69,17 @@ const WordFade = ({ words = [], duration = 3000 }: { words: string[]; duration: 
     </div>
   );
 };
+
 const Carousel = () => {
   const slides = [
-    {
-      url: '/images/screenshot1.png',
-    },
     {
       url: '/images/image1.png',
     },
     {
-      url: '/images/image3.png',      
+      url: '/images/screenshot1.png',
+    },
+    {
+      url: '/images/image3.png',
     },
 
     /* {
@@ -108,24 +109,24 @@ const Carousel = () => {
   };
 
   return (
-    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group'>
+    <div className='max-w-[1400px] h-3/4 w-full m-auto py-0 px-4 relative group'>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className='w-full h-full rounded-2xl bg-center bg-cover duration-500'
+        className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
       ></div>
       {/* Left Arrow */}
-      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactLeft onClick={prevSlide} size={30} />
       </div>
       {/* Right Arrow */}
-      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
       <div className='flex top-4 justify-center py-2'>
         {slides.map((slide, slideIndex) => (
           <div
             key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
+            onClick={() => goToSlide({ slideIndex: slideIndex })}
             className='text-2xl cursor-pointer'
           >
             <RxDotFilled />
@@ -595,11 +596,11 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
   )
 }
 
-const IndexPage: React.FC<PageProps> = () => { 
+const IndexPage: React.FC<PageProps> = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <>
       <SmoothScrollbar>
@@ -637,12 +638,12 @@ const IndexPage: React.FC<PageProps> = () => {
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
             </section> */}
             <article className="bg-black">
-            <section className="h-[20vh]">&nbsp;</section>
-
-              <section className="w-screen">
+              <section className="h-[20vh]">&nbsp;</section>
+              {/* <section className="h-1/4">&nbsp;</section> */}
+              <section className="w-screen h-screen">
+                <div className="py-5">
                 <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
-              </section>
-              <section className="h-screen w-screen">
+                </div>
                 <Carousel />
               </section>
               {/* <header>
@@ -660,20 +661,19 @@ const IndexPage: React.FC<PageProps> = () => {
               </section>
             )}
             <section>Both these ScrollScenes are tracking DOM elements and scaling their WebGL meshes to fit.</section> */}
-              <section>
-                {/* <img src="/images/image1.png"></img>
+              {/* <section>
+                <img src="/images/image1.png"></img>
               <br />
               <img src="/images/image2.png"></img>
               <br />
-              <img src="/images/image3.png"></img> */}
-                {/* <img src={image2} />
+              <img src="/images/image3.png"></img>
+                <img src={image2} />
                 <br />
                 <img src={image3} />
                 <br />
-                <img src={image4} /> */}
+                <img src={image4} />
 
-              </section>
-              {/* <section>&nbsp;</section> */}
+              </section> */}
             </article>
           </article>
         )}
