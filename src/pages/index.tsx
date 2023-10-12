@@ -280,7 +280,7 @@ const Viewport2 = ({ el }: { el: any; }) => {
 
             {/* <Diamond position={[1.25, -0.5, 0]} scale={0.37} /> */}
             {/* <Diamond position={[1.8, -1.6, 0]} scale={0.5} /> */}
-            <Sphere args={[2, 32, 32]} position={[0, 0, 0]} />
+            <Sphere args={[2, 16, 16]} position={[0, 0, 0]} />
 
             <MeshTransmissionMaterial
               chromaticAberration={1}
@@ -346,12 +346,14 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
   const [ratio, setRatio] = useState();
+  const [width, setWidth] = useState("w-1/2");
 
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 600) {
         // setRatio("5vw");
         // document.getElementById("SphereViewport")!.style.zIndex = "-10";
+        
       } else {
         // setRatio("2vw");
       }
@@ -376,7 +378,7 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
       </section>
       <section>
         <div className="flex w-screen h-[50vh]">
-          <p className="text-base text-justify 2-[87vw]" style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
+          <p className={"text-justify text-lg w-[87vw]"} style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
             I enjoy designing and developing interactive applications that combine aesthetics and functionality.
             I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
             , Vue.js, React.js, Maya, Blender, & Unity.
