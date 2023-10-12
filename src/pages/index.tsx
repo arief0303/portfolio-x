@@ -595,7 +595,11 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
   )
 }
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage: React.FC<PageProps> = () => { 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <>
       <SmoothScrollbar>
