@@ -109,7 +109,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className='max-w-[1400px] h-3/4 w-full m-auto py-0 px-4 relative group'>
+    <div className='max-w-[1400px] h-screen w-full m-auto py-0 px-4 relative group'>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
@@ -640,11 +640,11 @@ const IndexPage: React.FC<PageProps> = () => {
             <article className="bg-black">
               <section className="h-[20vh]">&nbsp;</section>
               {/* <section className="h-1/4">&nbsp;</section> */}
-              <section className="w-screen h-screen">
+              <section className="w-screen h-[110vh]">
                 <div className="py-5">
-                <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
+                  <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
                 </div>
-                <Carousel />
+                  <Carousel />
               </section>
               {/* <header>
               <h1>Project Catalyst</h1>
