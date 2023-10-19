@@ -117,7 +117,7 @@ const Carousel = () => {
   }, [currentIndex]);
 
   return (
-    <div className='max-w-[1400px] h-screen w-full m-auto py-0 px-4 relative group'>
+    <div className='max-w-[1400px] h-full w-full m-auto py-0 px-4 relative group'>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
@@ -455,10 +455,7 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
       </section>
       <section>
         <div className="flex w-screen h-[50vh]">
-          <p className={"text-justify text-lg w-[87vw]"} style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art.
-            I enjoy designing and developing interactive applications that combine aesthetics and functionality.
-            I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js)
-            , Vue.js, React.js, Maya, Blender, & Unity.
+          <p className={"text-justify text-lg w-[87vw]"} style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art. I enjoy designing and developing interactive applications that combine aesthetics and functionality. I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js), Vue.js, React.js, Maya, Blender, Unreal Engine, and Unity.
           </p>
           <div id="SphereViewport" className="absolute w-screen h-full -z-10">
             <ViewportDemo2 />
@@ -648,8 +645,8 @@ const IndexPage: React.FC<PageProps> = () => {
             <article className="bg-black">
               <section className="h-[20vh]">&nbsp;</section>
               {/* <section className="h-1/4">&nbsp;</section> */}
-              <section className="w-screen h-[110vh]">
-                <div className="py-5">
+              <section className="w-screen h-screen">
+                <div className="py-10">
                   <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
                 </div>
                 <Carousel />
