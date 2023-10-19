@@ -108,6 +108,14 @@ const Carousel = () => {
     setCurrentIndex(slideIndex);
   };
 
+  //for every second change the slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
     <div className='max-w-[1400px] h-screen w-full m-auto py-0 px-4 relative group'>
       <div
@@ -644,7 +652,7 @@ const IndexPage: React.FC<PageProps> = () => {
                 <div className="py-5">
                   <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
                 </div>
-                  <Carousel />
+                <Carousel />
               </section>
               {/* <header>
               <h1>Project Catalyst</h1>
