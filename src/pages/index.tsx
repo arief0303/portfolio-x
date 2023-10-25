@@ -75,14 +75,17 @@ const Carousel = () => {
     {
       url: '/images/image1.png',
       description: 'Aspace',
+      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using Vue.js as the framework.',
     },
     {
       url: '/images/screenshot1.png',
       description: 'Bitaverse',
+      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework.',
     },
     {
       url: '/images/image3.png',
       description: '3D Van interior configurator',
+      details: 'A 3D product configurator made with Three.js.',
     },
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
@@ -128,6 +131,9 @@ const Carousel = () => {
           <p className='text-white text-2xl font-bold'>
             {slides[currentIndex].description}
           </p>
+          <h4 className='text-white text-lg font-light'>
+            {slides[currentIndex].details}
+          </h4>
         </div>
       </div>
       {/* Left Arrow */}
