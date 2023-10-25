@@ -74,14 +74,16 @@ const Carousel = () => {
   const slides = [
     {
       url: '/images/image1.png',
+      description: 'Bitaverse',
     },
     {
       url: '/images/screenshot1.png',
+      description: 'Aspace',
     },
     {
       url: '/images/image3.png',
+      description: '3D Van interior configurator.',
     },
-
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
     },
@@ -121,7 +123,13 @@ const Carousel = () => {
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
-      ></div>
+      >
+        <div className='absolute bottom-0 left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
+          <p className='text-white text-2xl font-bold'>
+            {slides[currentIndex].description}
+          </p>
+        </div>
+      </div>
       {/* Left Arrow */}
       <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactLeft onClick={prevSlide} size={30} />
