@@ -630,6 +630,21 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
   )
 }
 
+function Header() {
+  return (
+    <header className="fixed top-0 left-0 z-50 p-0">
+      <div className="flex items-center justify-between px-10 py-5 w-screen" style={{ backdropFilter: 'blur(10px)', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
+        <div className="flex items-center">
+          <img className="h-10" src="/logo192.png" alt="logo" />
+          <h1 className="ml-2 text-2xl font-bold text-white">Arief R. Syauqie</h1>
+        </div>
+        <div className="flex items-center space-x-4 text-white">
+        </div>
+      </div>
+    </header> 
+  )
+}
+
 const IndexPage: React.FC<PageProps> = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -644,6 +659,7 @@ const IndexPage: React.FC<PageProps> = () => {
               <AnimatedText />
               <ViewportDemo />
             </article>
+            <Header />
             {/* <header>@14islands/r3f-scroll-rig + Framer Motion</header> */}
             {/* <section> */}
             {/* <h1>HTML parallax with useTracker() and Framer Motion</h1> */}
