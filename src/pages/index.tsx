@@ -134,19 +134,22 @@ const Carousel = () => {
   return (
     <div className='max-w-[1400px] h-full w-full m-auto py-0 px-4 relative group'>
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'}}
+        style={{
+          backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
         className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
       >
-        <div className='absolute bottom-0 left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
-          <p className='text-white text-2xl font-bold'>
-            {slides[currentIndex].description}
-          </p>
-          <h4 className='text-white text-lg font-light'>
-            {slides[currentIndex].details}
-          </h4>
-        </div>
+      </div>
+      <div className='absolute bottom-0 left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
+        <br />
+        <p className='text-white text-2xl font-bold'>
+          {slides[currentIndex].description}
+        </p>
+        <h4 className='text-white text-lg font-light'>
+          {slides[currentIndex].details}
+        </h4>
       </div>
       {/* Left Arrow */}
       <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
