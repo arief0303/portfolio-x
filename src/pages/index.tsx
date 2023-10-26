@@ -134,7 +134,9 @@ const Carousel = () => {
   return (
     <div className='max-w-[1400px] h-full w-full m-auto py-0 px-4 relative group'>
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+        style={{ backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'}}
         className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
       >
         <div className='absolute bottom-0 left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
