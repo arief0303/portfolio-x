@@ -87,6 +87,11 @@ const Carousel = () => {
       description: '3D Van interior configurator',
       details: 'A 3D product configurator made with Three.js.',
     },
+    {
+      url: '/images/Screenshot4.png',
+      description: 'Closepay',
+      details: 'Payment Gateway solution web application with React as the core framework.',
+    },
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
     },
@@ -115,6 +120,11 @@ const Carousel = () => {
 
   //for every second change the slide
   useEffect(() => {
+    //preload all images first
+    slides.forEach((slide) => {
+      new Image().src = slide.url;
+    });
+
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
