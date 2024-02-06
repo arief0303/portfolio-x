@@ -75,22 +75,22 @@ const Carousel = () => {
     {
       url: '/images/image1.png',
       description: 'Aspace',
-      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using Vue.js as the framework.',
+      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using Vue.js as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
     },
     {
       url: '/images/screenshot1.png',
       description: 'Bitaverse',
-      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework.',
+      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
     },
     {
       url: '/images/image3.png',
       description: '3D Van interior configurator',
-      details: 'A 3D product configurator made with Three.js.',
+      details: 'I developed an online 3D product customizer using Three.js, a JavaScript library for 3D graphics. The web app lets users customize and preview vehicle interiors for a particular model of a van.',
     },
     {
       url: '/images/Screenshot4.png',
       description: 'Closepay',
-      details: 'Payment Gateway solution web application with React as the core framework.',
+      details: 'I developed web applications for a fintech startup using various frameworks, mainly React and Next.js. The company focuses on payment systems especially in the educational industry.',
     },
     /* {
       url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
@@ -505,7 +505,6 @@ function VerticalParallax({ children, ...props }: { children: string }) {
   const imageY = useTransform(progress, [0, 1], ['-25vh', '25vh'])
 
   return (
-
     <section ref={el} className="VerticalParallax Debug">
       <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
         <h2>{children}</h2>
