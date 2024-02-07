@@ -147,7 +147,7 @@ const Carousel = () => {
         <p className='text-white text-2xl font-bold'>
           {slides[currentIndex].description}
         </p>
-        <h4 className='text-white text-lg font-light'>
+        <h4 className='text-white text-lg font-light h-80'>
           {slides[currentIndex].details}
         </h4>
       </div>
@@ -474,24 +474,26 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
 
   return (
     <>
-      <section ref={el} className="VerticalParallax Debug">
-        <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
-          <h2 className="gradient-text">About</h2>
-        </motion.div>
-        <motion.div className="Image" style={{ y: imageY }}>
-          <WebGLImageContainer src={src} id={id} />
-        </motion.div>
-      </section>
-      <section>
-        <div className="flex w-screen h-[50vh]">
-          <p className={"text-justify text-lg w-[87vw]"} style={{ fontSize: ratio }}>I am a creative coder with a keen interest in computer graphics and art. I enjoy designing and developing interactive applications that combine aesthetics and functionality. I have experience in various programming languages and frameworks, such as Javascript, C#, WebGL(Babylon.js & Three.js), Vue.js, React.js, Maya, Blender, Unreal Engine, and Unity.
-          </p>
-          <div id="SphereViewport" className="absolute w-screen h-full -z-10">
-            <ViewportDemo2 />
+      <div id="aboutSection">
+        <section ref={el} className="VerticalParallax Debug">
+          <motion.div className="VerticalParallaxMotion" style={{ y: textY }}>
+            <h2 className="gradient-text">About</h2>
+          </motion.div>
+          <motion.div className="Image" style={{ y: imageY }}>
+            <WebGLImageContainer src={src} id={id} />
+          </motion.div>
+        </section>
+        <section>
+          <div className="flex w-screen h-[50vh]">
+            <p className={"text-justify text-lg w-[87vw] max-w-full"} style={{ fontSize: ratio }}>I am a creative developer with a passion for creating visually appealing and interactive user experiences. My expertise lies in designing and developing web applications that seamlessly blend aesthetics with functionality. I possess proficiency in a range of programming languages and frameworks, including C#, Python, Javascript, Typescript, React.js, Next.js, Vue.js, Gatsby.js as well as experience with WebGL technologies like Babylon.js and Three.js. Additionally, I have a solid foundation in 3D design tools such as Blender and Maya, along with hands-on experience in game development using WebGL.
+            </p>
+            <div id="SphereViewport" className="absolute w-screen h-full -z-10">
+              <ViewportDemo2 />
+            </div>
           </div>
-        </div>
-        <section className="h-[25vh] bg-gradient-to-b from-transparent to-black">&nbsp;</section>
-      </section>
+          <section className="h-[25vh] bg-gradient-to-b from-transparent to-black">&nbsp;</section>
+        </section>
+      </div>
     </>
   )
 }
@@ -630,6 +632,20 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
 }
 
 function Header() {
+  const handleClickScrollAboutSection = () => {
+    const element = document.getElementById('aboutSection');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleClickScrollProjectsSection = () => {
+    const element = document.getElementById('projectsSection');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 z-50 p-0">
       <div className="flex items-center justify-between px-10 py-5 w-screen" style={{ backdropFilter: 'blur(10px)', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
@@ -639,8 +655,16 @@ function Header() {
         </div>
         <div className="flex items-center space-x-4 text-white">
         </div>
+        <div id="hero-section">
+          <button className="btn" onClick={handleClickScrollAboutSection}>
+            About
+          </button>
+          <button className="btn" onClick={handleClickScrollProjectsSection}>
+            Projects
+          </button>
+        </div>
       </div>
-    </header> 
+    </header>
   )
 }
 
@@ -690,7 +714,7 @@ const IndexPage: React.FC<PageProps> = () => {
               <section className="h-[20vh]">&nbsp;</section>
               {/* <section className="h-1/4">&nbsp;</section> */}
               <section className="w-screen h-screen">
-                <div className="py-10">
+                <div id="projectsSection">
                   <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
                 </div>
                 <Carousel />
