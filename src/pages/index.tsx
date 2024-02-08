@@ -212,11 +212,14 @@ const Loader = () => {
   return transition(
     ({ progress, opacity }, active) =>
       active && (
-        <a.div className='loading' style={{ opacity }}>
-          <div className='loading-bar-container'>
-            <a.div className='loading-bar' style={{ width: progress }}></a.div>
-          </div>
-        </a.div>
+        <>
+          <a.div className='loading' style={{ opacity }}>
+            <div className='loading-bar-container'>
+              <a.div className='loading-bar' style={{ width: progress }}></a.div>
+              <div style={{ textAlign: "center" }}>loading</div>
+            </div>
+          </a.div>
+        </>
       )
   );
 }
