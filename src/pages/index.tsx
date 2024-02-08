@@ -111,6 +111,7 @@ const Carousel = () => {
   
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
+    setTimeout(() => setShouldContinue(true), 10000);
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
@@ -124,6 +125,7 @@ const Carousel = () => {
   
   const nextSlideBtnClick = () => {
     setShouldContinue(false);
+    setTimeout(() => setShouldContinue(true), 10000);
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
@@ -169,11 +171,13 @@ const Carousel = () => {
         </h4>
       </div>
       {/* Left Arrow */}
-      <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
+      <div className='absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
       </div>
       {/* Right Arrow */}
-      <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
+      <div className='absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
       </div>
       <div className='flex top-4 justify-center py-2'>
