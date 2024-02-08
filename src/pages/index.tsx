@@ -101,14 +101,17 @@ const Carousel = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [shouldContinue, setShouldContinue] = useState(true);
 
   const prevSlide = () => {
+    setShouldContinue(false);
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
+    setShouldContinue(false);
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
@@ -126,10 +129,12 @@ const Carousel = () => {
     });
 
     const interval = setInterval(() => {
-      nextSlide();
+      if (shouldContinue) {
+        nextSlide();
+      }
     }, 5000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, shouldContinue]);
 
   return (
     <div className='max-w-[1400px] h-full w-full m-auto py-0 px-4 relative group'>
