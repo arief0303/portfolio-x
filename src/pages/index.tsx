@@ -73,14 +73,14 @@ const WordFade = ({ words = [], duration = 3000 }: { words: string[]; duration: 
 const Carousel = () => {
   const slides = [
     {
-      url: '/images/image1.png',
-      description: 'Aspace',
-      details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using Vue.js as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
-    },
-    {
       url: '/images/screenshot1.png',
       description: 'Bitaverse',
       details: 'A metaverse featuring multiplayer made with Babylon.js & Colyseus using React as the framework. I developed metaverses featuring multiplayer using Babylon.js and Colyseus. I used Babylon.js to create and render the 3D models, materials, lights, cameras, and scenes for the metaverses. I used Colyseus to create and manage the game rooms, state synchronization, networking, and interactivity for the multiplayer features.',
+    },
+    {
+      url: '/images/image1.png',
+      description: 'Aspace',
+      details: 'A metaverse variant built on same technologies as Bitaverse for the client Sampoerna. Featuring additional components such as location based audio system, LOD performance optimization, and player area based(portal) teleportation.',
     },
     {
       url: '/images/image3.png',
@@ -509,7 +509,7 @@ function AboutSection({ id, src, ...props }: { id: string, src: string }) {
         </section>
         <section>
           <div className="flex w-screen h-[50vh]">
-            <p className={"text-justify text-lg w-[87vw] max-w-full"} style={{ fontSize: ratio }}>I am a creative developer with a passion for creating visually appealing and interactive user experiences. My expertise lies in designing and developing web applications that seamlessly blend aesthetics with functionality. I possess proficiency in a range of programming languages and frameworks, including C#, Python, Javascript, Typescript, React.js, Next.js, Vue.js, Gatsby.js as well as experience with WebGL technologies like Babylon.js and Three.js. Additionally, I have a solid foundation in 3D design tools such as Blender and Maya, along with hands-on experience in game development using WebGL.
+            <p className={"text-justify text-lg w-[87vw] max-w-full"} style={{ fontSize: ratio }}>I am a creative developer with a passion for creating visually appealing and interactive user experiences. My expertise lies in designing and developing web applications that seamlessly blend aesthetics with functionality. I possess proficiency in a range of programming languages and frameworks, including C#, C++, Python, Javascript, Typescript, React.js, Next.js, Vue.js, Gatsby.js as well as experience with WebGL technologies like Babylon.js and Three.js. Additionally, I have a solid foundation in 3D design tools such as Blender, Houdini , Maya, and ZBrush along with hands-on experience in game development using WebGL.
             </p>
             <div id="SphereViewport" className="absolute w-screen h-full -z-10">
               <ViewportDemo2 />
