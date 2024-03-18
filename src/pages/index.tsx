@@ -13,6 +13,8 @@ import { Model } from '../components/Untitled'
 import { Diamond } from '../components/Diamond'
 // @ts-ignore
 import { Sphere } from '../components/Sphere'
+import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
 // @ts-ignore
 import myFont from '../assets/fonts/XYBER_Regular.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
@@ -31,8 +33,8 @@ extend({ TextGeometry })
 
 const FADE_INTERVAL_MS = 2000
 const WORD_CHANGE_INTERVAL_MS = FADE_INTERVAL_MS * 2
-const WORDS_TO_ANIMATE = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
-const texts = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻']
+const WORDS_TO_ANIMATE = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo']
+const texts = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo']
 const time_between_text = 2; // text show for 2s before fade out.
 const transition_duration = 0.5;
 
@@ -57,7 +59,7 @@ const WordFade = ({ words = [], duration = 3000 }: { words: string[]; duration: 
   }, [words, duration]);
 
   return (
-    <div id="TitleText" className="word-fade">
+    <div id="TitleText" className="word-fade pt-5">
       {words.map((word, i) => (
         <div
           key={i}
@@ -108,7 +110,7 @@ const Carousel = () => {
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
-  
+
   const prevSlideBtnClick = () => {
     setShouldContinue(false);
     setTimeout(() => setShouldContinue(true), 10000);
@@ -122,7 +124,7 @@ const Carousel = () => {
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
-  
+
   const nextSlideBtnClick = () => {
     setShouldContinue(false);
     setTimeout(() => setShouldContinue(true), 10000);
@@ -151,18 +153,17 @@ const Carousel = () => {
   }, [currentIndex, shouldContinue]);
 
   return (
-    <div className='max-w-[1400px] h-full w-full m-auto py-0 px-4 relative group'>
+    <div className='h-full w-full m-auto py-0 px-4 relative group'>
       <div
         style={{
           backgroundImage: `url(${slides[currentIndex].url})`, backgroundSize: 'contain',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
-        className='w-full h-3/4 rounded-2xl bg-center bg-cover duration-500'
+        className='w-full h-1/2 rounded-2xl bg-center bg-cover duration-500'
       >
       </div>
-      <div className='absolute bottom-0 left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
-        <br />
+      <div className='absolute top-[25rem] left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
         <p className='text-white text-2xl font-bold'>
           {slides[currentIndex].description}
         </p>
@@ -172,15 +173,15 @@ const Carousel = () => {
       </div>
       {/* Left Arrow */}
       {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
-      <div className='absolute top-[36%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      <div className='absolute top-[36%] -translate-x-0 translate-y-[-200%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactLeft onClick={prevSlideBtnClick} size={30} />
       </div>
       {/* Right Arrow */}
       {/* <div className='hidden group-hover:block absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'> */}
-      <div className='absolute top-[36%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+      <div className='absolute top-[36%] -translate-x-0 translate-y-[-200%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
         <BsChevronCompactRight onClick={nextSlideBtnClick} size={30} />
       </div>
-      <div className='flex top-4 justify-center py-2'>
+      {/* <div className='flex justify-center py-2 pb-96'>
         {slides.map((slide, slideIndex) => (
           <div
             key={slideIndex}
@@ -190,7 +191,7 @@ const Carousel = () => {
             <RxDotFilled />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -219,7 +220,7 @@ const AnimatedText = () => {
       <span className={fadeProp.fade}>{WORDS_TO_ANIMATE[wordOrder]}</span>, I'm Arief.
     </h2>
   )  */
-  const words: string[] = ['Hello', 'Ciao', 'Jambo', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo', 'Hej', '👋🏻'];
+  const words: string[] = ['Hello', 'Ciao', 'Bonjour', 'Salut', 'Hola', 'Nǐ hǎo', 'Hallo'];
   return <WordFade words={words} duration={2000} />;
 }
 
@@ -456,7 +457,7 @@ function HorizontalMarquee({ children }: { children: string }) {
   const tracker = useTracker(el)
   const progress = useTrackerMotionValue(tracker)
 
-  const x = useTransform(progress, [0, 1], ['0vw', '-50vw'])
+  const x = useTransform(progress, [0, 1], ['18vw', '2vw'])
 
   return (
     <section ref={el} className="Marquee Debug">
@@ -637,7 +638,7 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
   const { hasSmoothScrollbar } = useScrollRig()
   return (
     <>
-      <div ref={el} className="Placeholder ScrollScene">
+      <div ref={el} className="Placeholder ScrollScene h-3/4">
         <img className={styles.hiddenWhenSmooth} id={id} ref={img} loading={loading} src={src} alt="This will be loaded as a texture" />
       </div>
       {/* {hasSmoothScrollbar && (
@@ -655,43 +656,6 @@ const WebGLImageContainer = ({ id, src, loading = 'eager' }: { id?: string; src:
   )
 }
 
-function Header() {
-  const handleClickScrollAboutSection = () => {
-    const element = document.getElementById('aboutSection');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleClickScrollProjectsSection = () => {
-    const element = document.getElementById('projectsSection');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <header className="fixed top-0 left-0 z-50 p-0">
-      <div className="flex items-center justify-between px-10 py-5 w-screen" style={{ backdropFilter: 'blur(10px)', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
-        <div className="flex items-center">
-          <img className="h-10" src="/logo192.png" alt="logo" />
-          <h1 className="ml-2 text-2xl font-bold text-white">Arief R. Syauqie</h1>
-        </div>
-        <div className="flex items-center space-x-4 text-white">
-        </div>
-        <div id="hero-section">
-          <button className="btn" onClick={handleClickScrollAboutSection}>
-            About
-          </button>
-          <button className="btn" onClick={handleClickScrollProjectsSection}>
-            Projects
-          </button>
-        </div>
-      </div>
-    </header>
-  )
-}
-
 const IndexPage: React.FC<PageProps> = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -699,6 +663,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
   return (
     <>
+      <Loader />
       <SmoothScrollbar>
         {(bind) => (
           <article {...bind}>
@@ -735,11 +700,11 @@ const IndexPage: React.FC<PageProps> = () => {
               <p>In this example, we take the scroll progress from the tracker and feed it into a MotionValue.</p>
             </section> */}
             <article className="bg-black">
-              <section className="h-[20vh]">&nbsp;</section>
+              {/* <section className="h-[20vh]">&nbsp;</section> */}
               {/* <section className="h-1/4">&nbsp;</section> */}
               <section className="w-screen h-screen">
                 <div id="projectsSection">
-                  <HorizontalMarquee>PROJECTS PROJECTS PROJECTS</HorizontalMarquee>
+                  <HorizontalMarquee>PROJECTS</HorizontalMarquee>
                 </div>
                 <Carousel />
               </section>
@@ -775,7 +740,7 @@ const IndexPage: React.FC<PageProps> = () => {
           </article>
         )}
       </SmoothScrollbar>
-      <Loader />
+      <Footer />
     </>
   )
 }

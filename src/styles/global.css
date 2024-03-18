@@ -165,7 +165,7 @@ section.text {
   /* outline: 2px dashed turquoise; */
 
   aspect-ratio: 16/10;
-  margin: 10vw;
+  /* margin: 10vw; */
   width: 80vw;
 }
 
@@ -180,14 +180,14 @@ section.text {
 .Marquee h1 {
   margin: 0;
   line-height: 1;
-  font-size: 15vw;
+  font-size: 10vw;
 }
 
 .VerticalParallax {
   background: #000;
   /* background: #222; */
   /* background: linear-gradient(0deg, rgba(255,255,255,1) 62%, rgba(0,0,0,1) 99%); */
-  height: 100vh;
+  height: 75vh;
   position: relative;
   overflow: hidden;
 
