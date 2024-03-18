@@ -163,7 +163,7 @@ const Carousel = () => {
         className='w-full h-1/2 rounded-2xl bg-center bg-cover duration-500'
       >
       </div>
-      <div className='absolute top-[25rem] left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
+      <div className='absolute top-[30rem] left-0 w-full h-1/4 bg-black/50 rounded-2xl p-4'>
         <p className='text-white text-2xl font-bold'>
           {slides[currentIndex].description}
         </p>
